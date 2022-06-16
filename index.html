@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script defer src="app.js"></script>
   <title>Weather App</title>
+  <link rel="icon" type="image/x-icon" href="/favicon(1).ico">
   <style>
     * {
       margin: 0;
@@ -15,48 +16,125 @@
 
     /* screen 1 */
     #choseCity {
-      background-image: url(https://media.wired.co.uk/photos/606dba1c9a15f73a597a2aa1/master/w_1600,c_limit/weather.jpg);
+      background-image: url(https://media1.giphy.com/media/iKGcHlTjwmJ1mKWXIR/giphy.gif?cid=ecf05e470y3yurm6ybljjku3yw3jbqn166zdhfq6uhmkaknq&rid=giphy.gif&ct=g);
       width: 100vw;
       height: 100vh;
-      display: flex;
       flex-direction: column;
-
+      overflow: hidden;
     }
 
     .city {
       background: rgba(0, 0, 0, 0.15);
-      height: 10rem;
+      height: 7rem;
+      padding-bottom: 3rem;
       width: 100vw;
       font-weight: 500;
       font-size: 1.5rem;
-
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
     }
 
+    .city>div{
+      width: 33.3%;
+    }
+    .left-side {
+      order: 1;
+padding-left: 3rem;
+    }
+
+    .right-side {
+      order: 3;
+      padding-right: 3rem;
+      margin-top: 1.5rem;
+
+    }
     #formCity {
-      margin-left: 35%;
-      margin-top: 2rem;
+      order: 2;
+      display: inline-grid;
+
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+
+      height: 15vh;
+
+
 
 
     }
-
     #cityName {
-      width: 10rem;
+      width: rem;
       height: 1.5rem;
       background-color: whitesmoke;
-    }
+      margin-top: 1rem;
+      margin-bottom: 1rem;
 
+
+
+    }
+    .labelCity{
+
+      grid-row-start: 2;
+      grid-row-end: 2;
+
+      grid-column-start: 2;
+      grid-column-end: 5;
+    }
     #unitTemp-metric {
-      margin-left: 2rem;
       margin-top: 1rem;
+
+      grid-row-start: 3;
+      grid-row-end: 3;
+
+      grid-column-start: 3;
+      grid-column-end: 4;
+
+
+    }
+    .labelCels{
+      grid-row-start: 3;
+      grid-row-end: 3;
+
+      grid-column-start: 2;
+      grid-column-end: 3;
+      margin-top: 0.5rem;
+    }
+    #unitTemp-imperial {
+      margin-left: 1rem;
+      margin-top: 1rem;
+
+
+      grid-row-start: 3;
+      grid-row-end: 3;
+
+      grid-column-start: 5;
+      grid-column-end: 6;
+
+
     }
 
-    #unitTemp-imperial {
-      margin-left: 2rem;
-      margin-top: 1rem;
+    .labelImper{
+
+      grid-row-start: 3;
+      grid-row-end: 3;
+
+      grid-column-start: 4;
+      grid-column-end: 5;
+
+      margin-top: 0.5rem;
+      margin-left: 1rem;
+
     }
 
     #btn-submit {
       height: 2rem;
+      margin-top: 1rem;
+
+      grid-row-start: 2;
+      grid-row-end: 2;
+
+      grid-column-start: 5;
+      grid-column-end: 5;
     }
 
     .footer {
@@ -67,6 +145,7 @@
 
     #footerText {
       font-size: 1rem;
+      font-weight: bold;
     }
 
 
@@ -74,136 +153,154 @@
     /* screen 2 */
 
 
-#displayInfo{
-  height: 100vh;
-  width: 100vw;
-  display: none;
-  background-size: cover;
-  background-image: url(https://assets.heart.co.uk/2017/28/weather-1499781833-herowidev4-0.jpg);
-}
-
-.font{
-  font-size: 1.5rem;
-}
-.font-info{
-  font-size: 2.5rem;
-}
-
-.grid-container{
-  height: 100vh;
-  width: 100vw;
-  display: inline-grid;
-
-  grid-template-columns: repeat(4,1fr);
-  grid-template-rows: repeat(6,1fr);
-
-
-grid-template-areas: 
-"time country . . "
-"visibility city city mainWeather"
-"clouds curTemp curTemp weather"
-"humidity curTemp curTemp wind"
-"pressure feelsTemp . btn"
-". . . btn";
-}
+    #displayInfo {
+      height: 100vh;
+      width: 100vw;
+      display: none;
+      background-size: cover;
+      background-image: url(https://assets.heart.co.uk/2017/28/weather-1499781833-herowidev4-0.jpg);
 
 
 
-.country_box{
-  grid-area: country;
-  align-self: center;
-}
-.city_box{
-  grid-area: city;
-  align-self: center;
+    }
 
-}
-.current-temp_box{
-  grid-area: curTemp;
-  align-self: center;
+    .font {
+      font-size: 1.5rem;
+    }
 
-}
-.feels-like_box{
-  grid-area: feelsTemp;
-  align-self: center;
+    .font-info {
+      font-size: 2.5rem;
+    }
 
-}
-.pressure_box{
-  grid-area: pressure;
-  align-self: center;
+    .grid-container {
+      height: 100vh;
+      width: 100vw;
+      display: inline-grid;
 
-}
-.humidity_box{
-  grid-area: humidity;
-  align-self: center;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(6, 1fr);
 
-}
-.clouds_box{
-  grid-area: clouds;
-  align-self: center;
 
-}
-.visibility_box{
-  grid-area: visibility;
-  align-self: center;
-
-}
-.wind_box{
-  grid-area: wind;
-  align-self: center;
-
-}
-.weather_box{
-  grid-area: weather;
-  align-self: center;
-
-}
-.weather-main_box{
-  grid-area: mainWeather;
-  align-self: center;
-
-}
-.current-time_box{
-  grid-area: time;
-  align-self: center;
-
-}
-.btn-reload{
-  grid-area:btn ;
-  justify-self: center;
-  align-self: center;
+      grid-template-areas:
+        "time country . . "
+        "visibility city city mainWeather"
+        "clouds curTemp curTemp weather"
+        "humidity curTemp curTemp wind"
+        "pressure feelsTemp . btn"
+        ". . . btn";
+    }
 
 
 
-}
-                                                                                         
-                                                                                         
-                                                                                         
-                                                                                         
-                                                                                         
+    .country_box {
+      grid-area: country;
+      align-self: center;
+    }
+
+    .city_box {
+      grid-area: city;
+      align-self: center;
+
+    }
+
+    .current-temp_box {
+      grid-area: curTemp;
+      align-self: center;
+
+    }
+
+    .feels-like_box {
+      grid-area: feelsTemp;
+      align-self: center;
+
+    }
+
+    .pressure_box {
+      grid-area: pressure;
+      align-self: center;
+
+    }
+
+    .humidity_box {
+      grid-area: humidity;
+      align-self: center;
+
+    }
+
+    .clouds_box {
+      grid-area: clouds;
+      align-self: center;
+
+    }
+
+    .visibility_box {
+      grid-area: visibility;
+      align-self: center;
+
+    }
+
+    .wind_box {
+      grid-area: wind;
+      align-self: center;
+
+    }
+
+    .weather_box {
+      grid-area: weather;
+      align-self: center;
+
+    }
+
+    .weather-main_box {
+      grid-area: mainWeather;
+      align-self: center;
+
+    }
+
+    .current-time_box {
+      grid-area: time;
+      align-self: center;
+
+    }
+
+    .btn-reload {
+      grid-area: btn;
+      justify-self: center;
+      align-self: center;
+
+
+
+    }
+
+
+
     /* screen 2 */
   </style>
 </head>
 
 <body>
   <section id="choseCity">
+
     <div class="city">
+      <div class="left-side">Hello, and welcome to my weather app!</div>
+      <div class="right-side">To see the weather forecast in youre city simply type youre city name and chose the
+        temperature unit and hit submit! Default values are in kelvin.</div>
+
       <form id="formCity">
-        <label>City Name:<input id="cityName" type="text" autocomplete="off" value=""></label>
+
+        <label class="labelCity" >City Name:<input id="cityName" type="text" autocomplete="off" value=""></label>
         <button id="btn-submit" type="submit">Submit</button><br>
 
         <input type="radio" id="unitTemp-imperial" name="chosenTemp" value="units=imperial">
-        <label for="unitTemp-imperial">Fahrenheit</label>
+        <label class="labelImper" for="unitTemp-imperial">Fahrenheit</label>
         <input type="radio" id="unitTemp-metric" name="chosenTemp" value="units=metric">
-        <label for="unitTemp-metric">Celsius</label><br>
+        <label class="labelCels" for="unitTemp-metric">Celsius</label><br>
       </form>
 
     </div>
     <footer class="footer">
-      <p id="footerText">This is a simple weather app that shows you the weather in the selected city. You can chose
-        either celsius or
-        fahrenheit and if you dont chose either the default is in kelvin.</p>
       <p id="footerText">Author: Daniel Čović</p>
+
 
     </footer>
   </section>
@@ -211,33 +308,33 @@ grid-template-areas:
   <section id="displayInfo">
     <div class="grid-container">
 
-    <div class="country_box font">Country: <p class="font-info" id="country"></p>
-    </div>
-    <div class="city_box font">City: <p class="font-info" id="chosenCity"></p>
-    </div>
-    <div class="current-temp_box font">Current temperature: <p class="font-info" id="currentTemp"></p>
-    </div>
-    <div class="feels-like_box font">Feels Like: <p class="font-info" id="feelsLike"></p>
-    </div> 
-    <div class="pressure_box font">Pressure <p class="font-info" id="pressure"></p>
-    </div>
-    <div class="humidity_box font">Humidity: <p class="font-info" id="humidity"></p>
-    </div>
-    <div class="clouds_box font">Clouds: <p class="font-info" id="clouds"></p>
-    </div>
-    <div class="visibility_box font">Visibility: <p class="font-info" id="visibility"></p>
-    </div>
-    <div class="wind_box font">Wind: <p class="font-info" id="wind"></p>
-    </div>
-    <div class="weather_box font">Weather: <p class="font-info" id="weather"></p>
-    </div>
-    <div class="weather-main_box font">Weather Main: <p class="font-info" id="weatherMain"></p>
-    </div>
-    <div class="current-time_box font">Current Time: <p class="font-info" id="currentTime"></p>
-    </div>
-    <div class="btn-reload"><button  onclick="window.location.reload()">Search again!</button></div>
+      <div class="country_box font">Country: <p class="font-info" id="country"></p>
+      </div>
+      <div class="city_box font">City: <p class="font-info" id="chosenCity"></p>
+      </div>
+      <div class="current-temp_box font">Current temperature: <p class="font-info" id="currentTemp"></p>
+      </div>
+      <div class="feels-like_box font">Feels Like: <p class="font-info" id="feelsLike"></p>
+      </div>
+      <div class="pressure_box font">Pressure <p class="font-info" id="pressure"></p>
+      </div>
+      <div class="humidity_box font">Humidity: <p class="font-info" id="humidity"></p>
+      </div>
+      <div class="clouds_box font">Clouds: <p class="font-info" id="clouds"></p>
+      </div>
+      <div class="visibility_box font">Visibility: <p class="font-info" id="visibility"></p>
+      </div>
+      <div class="wind_box font">Wind: <p class="font-info" id="wind"></p>
+      </div>
+      <div class="weather_box font">Weather: <p class="font-info" id="weather"></p>
+      </div>
+      <div class="weather-main_box font">Weather Main: <p class="font-info" id="weatherMain"></p>
+      </div>
+      <div class="current-time_box font">Current Time: <p class="font-info" id="currentTime"></p>
+      </div>
+      <div class="btn-reload"><button onclick="window.location.reload()">Search again!</button></div>
 
-  </div>
+    </div>
 
   </section>
 

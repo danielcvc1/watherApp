@@ -81,6 +81,10 @@ form.addEventListener('submit', function (e) {
 
         //inserting into html
 
+
+        if (tempUnit=="celsius") {
+            
+        }
         
     }
 
